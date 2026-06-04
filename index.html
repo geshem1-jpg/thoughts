@@ -1,0 +1,502 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>הדרך שלי להצלחה — מחשבות חיוביות ושליליות</title>
+<link href="https://fonts.googleapis.com/css2?family=Heebo:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+:root {
+  --bg: #f8f7f4;
+  --surface: #ffffff;
+  --surface2: #f1efe8;
+  --border: rgba(0,0,0,0.12);
+  --border2: rgba(0,0,0,0.22);
+  --text: #1a1a1a;
+  --text2: #555;
+  --text3: #888;
+  --purple-50: #EEEDFE;
+  --purple-200: #AFA9EC;
+  --purple-400: #7F77DD;
+  --purple-600: #534AB7;
+  --purple-800: #3C3489;
+  --teal-50: #E1F5EE;
+  --teal-600: #0F6E56;
+  --teal-800: #085041;
+  --coral-50: #FAECE7;
+  --coral-400: #D85A30;
+  --coral-800: #712B13;
+  --radius-md: 8px;
+  --radius-lg: 12px;
+  --radius-xl: 16px;
+}
+body { font-family: 'Heebo', sans-serif; background: var(--bg); color: var(--text); min-height: 100vh; direction: rtl; }
+.app { max-width: 680px; margin: 0 auto; padding: 0 16px 60px; }
+
+.screen { display: none; padding: 2rem 0; animation: fadeIn 0.3s ease; }
+.screen.active { display: block; }
+@keyframes fadeIn { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: translateY(0); } }
+
+.hero { text-align: center; padding: 2rem 0; }
+.hero-icon { font-size: 72px; margin-bottom: 1rem; line-height: 1; }
+.hero h1 { font-size: 30px; font-weight: 700; margin-bottom: 0.5rem; }
+.hero p { font-size: 15px; color: var(--text2); line-height: 1.8; max-width: 480px; margin: 0 auto 2rem; }
+.meta-row { display: flex; gap: 20px; justify-content: center; margin-bottom: 2rem; flex-wrap: wrap; }
+.meta-item { font-size: 13px; color: var(--text3); background: var(--surface); border: 0.5px solid var(--border); padding: 6px 14px; border-radius: 100px; }
+
+.btn { display: inline-flex; align-items: center; gap: 8px; padding: 11px 24px; border-radius: var(--radius-lg); border: 0.5px solid var(--border2); background: var(--surface); color: var(--text); font-size: 15px; font-family: 'Heebo', sans-serif; cursor: pointer; transition: all 0.15s; font-weight: 500; }
+.btn:hover { background: var(--surface2); }
+.btn:active { transform: scale(0.98); }
+.btn-primary { background: var(--purple-800); color: var(--purple-50); border-color: var(--purple-800); }
+.btn-primary:hover { background: var(--purple-600); border-color: var(--purple-600); }
+
+.progress-wrap { margin-bottom: 2rem; }
+.progress-bar { display: flex; gap: 8px; justify-content: center; margin-bottom: 6px; }
+.progress-dot { width: 12px; height: 12px; border-radius: 50%; background: var(--surface2); border: 0.5px solid var(--border); transition: all 0.3s; }
+.progress-dot.done { background: var(--purple-800); border-color: var(--purple-800); }
+.progress-dot.current { background: var(--purple-200); border-color: var(--purple-600); }
+.progress-label { text-align: center; font-size: 12px; color: var(--text3); }
+
+.stage-label { text-align: center; font-size: 12px; color: var(--text3); letter-spacing: 0.06em; margin-bottom: 6px; }
+.stage-title { text-align: center; font-size: 22px; font-weight: 700; margin-bottom: 6px; }
+.stage-desc { text-align: center; font-size: 14px; color: var(--text2); margin-bottom: 1.5rem; line-height: 1.7; }
+
+.card { background: var(--surface); border: 0.5px solid var(--border); border-radius: var(--radius-lg); padding: 1.25rem; }
+.card:hover { border-color: var(--border2); }
+
+.flip-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-bottom: 1.5rem; }
+.flip-card { background: var(--surface); border: 0.5px solid var(--border); border-radius: var(--radius-lg); padding: 1.25rem; cursor: pointer; transition: all 0.2s; min-height: 100px; display: flex; align-items: center; justify-content: center; text-align: center; }
+.flip-card:hover { border-color: var(--purple-600); background: var(--purple-50); }
+.flip-card.flipped { background: var(--surface2); border-color: var(--border2); }
+.flip-card p { font-size: 14px; line-height: 1.7; color: var(--text); }
+.flip-card .front { font-weight: 500; font-size: 15px; }
+
+.tip-box { background: var(--purple-50); border: 0.5px solid var(--purple-200); border-radius: var(--radius-lg); padding: 1rem 1.25rem; margin: 1rem 0; }
+.tip-box p { font-size: 14px; color: var(--purple-800); line-height: 1.7; }
+
+.two-col { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-bottom: 1rem; }
+.col-header { font-size: 13px; font-weight: 700; text-align: center; padding: 8px 12px; border-radius: var(--radius-md); margin-bottom: 8px; }
+.col-pos { background: var(--teal-50); color: var(--teal-800); }
+.col-neg { background: var(--coral-50); color: var(--coral-800); }
+.drop-zone { min-height: 140px; border: 1.5px dashed var(--border2); border-radius: var(--radius-lg); padding: 10px; display: flex; flex-direction: column; gap: 8px; transition: all 0.2s; }
+.drop-zone.drag-over { border-color: var(--purple-600); background: var(--purple-50); }
+.draggable { padding: 10px 14px; border-radius: var(--radius-md); background: var(--surface); border: 0.5px solid var(--border2); font-size: 14px; cursor: grab; color: var(--text); line-height: 1.5; user-select: none; transition: all 0.15s; }
+.draggable:active { cursor: grabbing; opacity: 0.6; }
+.draggable.in-pos { background: var(--teal-50); border-color: var(--teal-600); color: var(--teal-800); }
+.draggable.in-neg { background: var(--coral-50); border-color: var(--coral-400); color: var(--coral-800); }
+.pool { display: flex; flex-direction: column; gap: 8px; margin-bottom: 1rem; }
+
+.feedback-box { padding: 1rem 1.25rem; border-radius: var(--radius-lg); margin-bottom: 1rem; }
+.feedback-box p { font-size: 14px; line-height: 1.7; }
+.feedback-ok { background: var(--teal-50); border: 0.5px solid var(--teal-600); color: var(--teal-800); }
+.feedback-err { background: var(--coral-50); border: 0.5px solid var(--coral-400); color: var(--coral-800); }
+
+.neg-box { background: var(--coral-50); border-right: 3px solid var(--coral-400); border-radius: var(--radius-lg); padding: 1.25rem; margin-bottom: 1rem; }
+.neg-box .lbl { font-size: 12px; color: var(--coral-800); margin-bottom: 6px; }
+.neg-box p { font-size: 15px; color: var(--coral-800); font-weight: 500; }
+.hint-box { background: var(--purple-50); border: 0.5px solid var(--purple-200); border-radius: var(--radius-md); padding: 0.75rem 1rem; margin-bottom: 1rem; font-size: 13px; color: var(--purple-800); }
+
+textarea { width: 100%; border: 0.5px solid var(--border2); border-radius: var(--radius-md); padding: 10px 14px; font-size: 14px; font-family: 'Heebo', sans-serif; color: var(--text); background: var(--surface); line-height: 1.7; resize: none; direction: rtl; }
+textarea:focus { outline: none; border-color: var(--purple-600); }
+.field-label { font-size: 13px; color: var(--text2); margin-bottom: 6px; }
+
+.scenario-box { background: var(--surface2); border-radius: var(--radius-lg); border: 0.5px solid var(--border); padding: 1.25rem; margin-bottom: 1rem; }
+.scenario-box .lbl { font-size: 12px; color: var(--text3); margin-bottom: 6px; }
+.scenario-box p { font-size: 15px; line-height: 1.7; }
+.options-list { display: flex; flex-direction: column; gap: 10px; margin-bottom: 1rem; }
+.opt-btn { text-align: right; padding: 12px 16px; border-radius: var(--radius-md); border: 0.5px solid var(--border2); background: var(--surface); font-size: 14px; cursor: pointer; color: var(--text); font-family: 'Heebo', sans-serif; line-height: 1.6; direction: rtl; transition: all 0.15s; }
+.opt-btn:hover:not(:disabled) { background: var(--surface2); border-color: var(--purple-400); }
+.opt-btn:disabled { cursor: default; }
+.opt-btn.correct-ans { background: var(--teal-50); border-color: var(--teal-600); color: var(--teal-800); font-weight: 500; }
+.opt-btn.wrong-ans { background: var(--coral-50); border-color: var(--coral-400); color: var(--coral-800); }
+.step-counter { font-size: 12px; color: var(--text3); text-align: center; margin-top: 8px; }
+
+.pledge-chips { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 1.25rem; }
+.pledge-chip { padding: 7px 14px; border-radius: 100px; border: 0.5px solid var(--border2); background: var(--surface); font-size: 13px; cursor: pointer; color: var(--text); font-family: 'Heebo', sans-serif; transition: all 0.15s; }
+.pledge-chip:hover, .pledge-chip.selected { background: var(--purple-50); border-color: var(--purple-600); color: var(--purple-800); }
+.pledge-preview { border: 2px solid var(--purple-600); border-radius: var(--radius-xl); padding: 1.5rem; background: var(--purple-50); text-align: center; margin: 1rem 0; }
+.pledge-preview .plbl { font-size: 12px; color: var(--purple-600); margin-bottom: 8px; }
+.pledge-preview .ptext { font-size: 20px; font-weight: 700; color: var(--purple-800); line-height: 1.6; }
+
+.result-circle { width: 130px; height: 130px; border-radius: 50%; border: 3px solid var(--purple-600); margin: 0 auto 1.5rem; display: flex; flex-direction: column; align-items: center; justify-content: center; background: var(--purple-50); }
+.result-pct { font-size: 34px; font-weight: 700; color: var(--purple-800); }
+.result-lbl { font-size: 12px; color: var(--purple-600); }
+.stars { font-size: 32px; text-align: center; margin-bottom: 1rem; letter-spacing: 6px; }
+.mini-stats { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 10px; margin: 1rem 0; }
+.stat-card { text-align: center; padding: 1rem; background: var(--surface); border: 0.5px solid var(--border); border-radius: var(--radius-md); }
+.stat-num { font-size: 30px; font-weight: 700; color: var(--text); }
+.stat-lbl { font-size: 12px; color: var(--text3); margin-top: 2px; }
+.pledge-final { border: 1.5px solid var(--purple-600); border-radius: var(--radius-lg); padding: 1.25rem; background: var(--purple-50); text-align: center; margin: 1rem 0; }
+.pledge-final .lbl { font-size: 12px; color: var(--purple-600); margin-bottom: 6px; }
+.pledge-final .txt { font-size: 17px; font-weight: 700; color: var(--purple-800); line-height: 1.6; }
+
+.nav-row { display: flex; justify-content: center; gap: 12px; margin-top: 1.5rem; flex-wrap: wrap; }
+.score-note { text-align: center; font-size: 13px; color: var(--text3); margin-top: 4px; }
+
+@media (max-width: 480px) {
+  .two-col { grid-template-columns: 1fr; }
+  .flip-grid { grid-template-columns: 1fr; }
+  .mini-stats { grid-template-columns: 1fr 1fr; }
+}
+</style>
+</head>
+<body>
+<div class="app">
+
+<!-- מסך פתיחה -->
+<div id="s-welcome" class="screen active">
+  <div class="hero">
+    <div class="hero-icon">🧠</div>
+    <h1>הדרך שלי להצלחה</h1>
+    <p>מחשבות חיוביות ומחשבות שליליות — איך המחשבות שלנו מעצבות את ההצלחה שלנו?</p>
+    <div class="meta-row">
+      <span class="meta-item">⏱ 45 דקות</span>
+      <span class="meta-item">🧩 4 שלבים</span>
+      <span class="meta-item">⭐ עד 100 נקודות</span>
+      <span class="meta-item">📚 כיתה ח׳</span>
+    </div>
+    <button class="btn btn-primary" onclick="goTo('s-intro')">יאללה, מתחילים! ←</button>
+  </div>
+</div>
+
+<!-- מבוא -->
+<div id="s-intro" class="screen">
+  <div class="stage-label">מבוא — 5 דקות</div>
+  <div class="stage-title">מה הן מחשבות?</div>
+  <div class="stage-desc">לחצ/י על כל כרטיס כדי לגלות את התוכן שמתחתיו</div>
+  <div class="flip-grid" id="flip-grid">
+    <div class="flip-card" data-front="💭 מה זו מחשבה?" data-back="מחשבה היא הדיאלוג הפנימי שלנו עם עצמנו — הקול בראש שמפרש את מה שקורה לנו." onclick="flipIt(this)">
+      <p class="front">💭 מה זו מחשבה?</p>
+    </div>
+    <div class="flip-card" data-front="🔴 מחשבה שלילית" data-back="מחשבה שמקטינה ומגבילה אותנו ומונעת מאיתנו לנסות. לדוגמה: 'אני תמיד נכשל — אין טעם לנסות'." onclick="flipIt(this)">
+      <p class="front">🔴 מחשבה שלילית</p>
+    </div>
+    <div class="flip-card" data-front="🟢 מחשבה חיובית" data-back="מחשבה שמעניקה לנו כוח ומניעה אותנו קדימה. לדוגמה: 'אני יכול/ה להשתפר אם אשקיע — כל צעד קדימה חשוב'." onclick="flipIt(this)">
+      <p class="front">🟢 מחשבה חיובית</p>
+    </div>
+    <div class="flip-card" data-front="🔄 האם אפשר לשנות?" data-back="כן! הטכניקה נקראת מסגור מחדש — לוקחים מחשבה שלילית ומנסחים אותה מחדש כמחשבה מועצמת וחיובית." onclick="flipIt(this)">
+      <p class="front">🔄 האם אפשר לשנות?</p>
+    </div>
+  </div>
+  <div class="tip-box">
+    <p>💡 <strong>ידעת?</strong> מחקרים מראים שאנחנו חושבים כ-60,000 מחשבות ביום — וכ-80% מהן נוטות להיות שליליות! הבשורה הטובה: ניתן לאמן את המוח לחשוב אחרת.</p>
+  </div>
+  <div class="nav-row">
+    <button class="btn" onclick="goTo('s-welcome')">→ חזרה</button>
+    <button class="btn btn-primary" onclick="goTo('s-sort')">לשלב 1 ←</button>
+  </div>
+</div>
+
+<!-- שלב 1: מיון -->
+<div id="s-sort" class="screen">
+  <div class="progress-wrap"><div class="progress-bar" id="pb1"></div><div class="progress-label">שלב 1 מתוך 4</div></div>
+  <div class="stage-label">שלב 1 — מיון מחשבות • 10 דקות</div>
+  <div class="stage-title">מיינו את המחשבות</div>
+  <div class="stage-desc">גררו כל מחשבה לעמודה המתאימה לה</div>
+  <div class="two-col">
+    <div>
+      <div class="col-header col-pos">🟢 מחשבה חיובית</div>
+      <div class="drop-zone" id="zone-pos" ondragover="allowDrop(event)" ondrop="dropCard(event,'pos')" ondragenter="this.classList.add('drag-over')" ondragleave="this.classList.remove('drag-over')"></div>
+    </div>
+    <div>
+      <div class="col-header col-neg">🔴 מחשבה שלילית</div>
+      <div class="drop-zone" id="zone-neg" ondragover="allowDrop(event)" ondrop="dropCard(event,'neg')" ondragenter="this.classList.add('drag-over')" ondragleave="this.classList.remove('drag-over')"></div>
+    </div>
+  </div>
+  <div style="font-size:13px; color:var(--text3); text-align:center; margin: 0.75rem 0;">מחשבות לסווג — גררו לאחת מהעמודות:</div>
+  <div class="pool" id="pool"></div>
+  <div id="sort-result" style="display:none;">
+    <div id="sort-fb"></div>
+    <div class="score-note">🏆 קיבלת <strong id="sort-pts">0</strong> נקודות בשלב זה</div>
+  </div>
+  <div class="nav-row">
+    <button class="btn" onclick="goTo('s-intro')">→ חזרה</button>
+    <button class="btn btn-primary" id="btn-sort-check" onclick="checkSort()" style="display:none;">בדיקה ✓</button>
+    <button class="btn btn-primary" id="btn-sort-next" onclick="goTo('s-reframe')" style="display:none;">לשלב 2 ←</button>
+  </div>
+</div>
+
+<!-- שלב 2: מסגור -->
+<div id="s-reframe" class="screen">
+  <div class="progress-wrap"><div class="progress-bar" id="pb2"></div><div class="progress-label">שלב 2 מתוך 4</div></div>
+  <div class="stage-label">שלב 2 — מסגור מחדש • 10 דקות</div>
+  <div class="stage-title">הופכים שלילי לחיובי</div>
+  <div class="stage-desc">קראו את המחשבה השלילית וכתבו אותה מחדש כמחשבה חיובית ומועצמת</div>
+  <div id="reframe-content"></div>
+  <div class="nav-row">
+    <button class="btn" onclick="goTo('s-sort')">→ חזרה</button>
+    <button class="btn btn-primary" id="btn-rf-check" onclick="checkReframe()">בדיקה ✓</button>
+    <button class="btn btn-primary" id="btn-rf-next" onclick="nextReframe()" style="display:none;">הבא ←</button>
+  </div>
+</div>
+
+<!-- שלב 3: סיטואציות -->
+<div id="s-scenarios" class="screen">
+  <div class="progress-wrap"><div class="progress-bar" id="pb3"></div><div class="progress-label">שלב 3 מתוך 4</div></div>
+  <div class="stage-label">שלב 3 — סיטואציות אמיתיות • 10 דקות</div>
+  <div class="stage-title">מה היית חושב/ת?</div>
+  <div class="stage-desc">קראו את הסיטואציה ובחרו את המחשבה המועצמת ביותר</div>
+  <div id="scenario-content"></div>
+  <div class="nav-row" id="sc-nav">
+    <button class="btn" onclick="goTo('s-reframe')">→ חזרה</button>
+  </div>
+</div>
+
+<!-- שלב 4: התחייבות -->
+<div id="s-pledge" class="screen">
+  <div class="stage-label">שלב 4 — התחייבות אישית • 10 דקות</div>
+  <div class="stage-title">המחשבה שלי לשנה הזו</div>
+  <div class="stage-desc">בחרו מחשבה חיובית אחת שתלווה אתכם בדרך להצלחה</div>
+  <div class="field-label">בחר/י מחשבה מוכנה:</div>
+  <div class="pledge-chips" id="pledge-chips"></div>
+  <div class="field-label">או כתבו משלכם:</div>
+  <textarea id="pledge-input" rows="3" placeholder="המחשבה החיובית שלי היא..." oninput="onPledgeInput()"></textarea>
+  <div id="pledge-preview-box" style="display:none;" class="pledge-preview">
+    <div class="plbl">המחשבה שלי לשנת הלימודים 🌟</div>
+    <div class="ptext" id="pledge-display"></div>
+  </div>
+  <div class="nav-row">
+    <button class="btn" onclick="goTo('s-scenarios')">→ חזרה</button>
+    <button class="btn btn-primary" onclick="savePledge()">שמירה וסיכום ←</button>
+  </div>
+</div>
+
+<!-- סיכום -->
+<div id="s-results" class="screen">
+  <div class="hero">
+    <div class="hero-icon">🏆</div>
+    <h1>כל הכבוד!</h1>
+    <div class="result-circle">
+      <div class="result-pct" id="final-pct">0%</div>
+      <div class="result-lbl">הצלחה</div>
+    </div>
+    <div class="stars" id="final-stars"></div>
+    <div class="mini-stats">
+      <div class="stat-card"><div class="stat-num" id="stat-pts">0</div><div class="stat-lbl">נקודות</div></div>
+      <div class="stat-card"><div class="stat-num" id="stat-correct">0</div><div class="stat-lbl">תשובות נכונות</div></div>
+      <div class="stat-card"><div class="stat-num">4</div><div class="stat-lbl">שלבים הושלמו</div></div>
+    </div>
+    <div class="pledge-final">
+      <div class="lbl">המחשבה שלי לשנה הזו:</div>
+      <div class="txt" id="pledge-final-txt"></div>
+    </div>
+    <div class="tip-box" style="margin-bottom:1.5rem;">
+      <p>💪 זכרו: כל פעם שאתם מחליפים מחשבה שלילית בחיובית, אתם מאמנים את המוח שלכם להצליח. זה אימון שמשתלם!</p>
+    </div>
+    <div class="nav-row">
+      <button class="btn btn-primary" onclick="restart()">נסו שוב ↺</button>
+    </div>
+  </div>
+</div>
+
+</div>
+<script>
+const THOUGHTS = [
+  {text:"אני לעולם לא אצליח במתמטיקה", type:"neg"},
+  {text:"אני יכול/ה להשתפר אם אתאמץ", type:"pos"},
+  {text:"אין טעם לנסות, ממילא אכשל", type:"neg"},
+  {text:"טעויות עוזרות לי ללמוד", type:"pos"},
+  {text:"אף אחד לא אוהב אותי", type:"neg"},
+  {text:"יש לי חברים שתומכים בי", type:"pos"},
+  {text:"אני לא מספיק/ה חכם/ה", type:"neg"},
+  {text:"אני מסוגל/ת להתמודד עם אתגרים", type:"pos"},
+];
+const REFRAMES = [
+  {neg:"לא כדאי לנסות, זה קשה מדי", hint:"חישבו על צעד קטן שאפשר לעשות עכשיו", example:"אנסה צעד קטן אחד בכל פעם ואתקדם לאט"},
+  {neg:"אני הכי גרוע/ה בכיתה", hint:"מה אפשר ללמוד מאחרים שמצליחים?", example:"אני יכול/ה ללמוד מהחבר/ה שמצליח/ה"},
+  {neg:"המורה לא מאמינה בי", hint:"מה בידיים שלכם לשנות ולא תלוי באחרים?", example:"אשקיע יותר ואראה שינוי בתוצאות שלי"},
+];
+const SCENARIOS = [
+  {sit:"קיבלת ציון נמוך במבחן שהתכוננת אליו.",
+   opts:["אני פשוט לא חכם/ה, אין טעם להמשיך.","המבחן מראה לי מה עלי לחזק — אתכונן טוב יותר.","לא משנה, הציון לא כל כך חשוב."],
+   correct:1, msg:"✅ נכון! מחשבת צמיחה מסתכלת על כישלון כהזדמנות לשיפור."},
+  {sit:"חבר/ה שלך ביטל/ה תוכנית בדקה התשעים.",
+   opts:["כולם מאכזבים אותי, אין לי חברים אמיתיים.","אולי קרה לו/לה משהו — אדבר איתו/ה ואבין.","אשים את זה בצד ולא אחשוב על זה."],
+   correct:1, msg:"✅ מדויק! במקום להאשים, מחשבה חיובית מחפשת הסבר ושומרת על הקשר."},
+  {sit:"נכשלת בניסיון ראשון לנגן שיר בגיטרה.",
+   opts:["אני לא מוכשר/ת, לא אצליח לנגן לעולם.","זה ניסיון ראשון — עם תרגול אני אתקדם בטוח.","גיטרה זה לא בשבילי בכלל."],
+   correct:1, msg:"✅ כל הכבוד! כל מיומנות מתפתחת עם תרגול — גם הגדולים התחילו מאפס."},
+];
+const PLEDGES = ["אני מסוגל/ת להצליח כשאני משקיע/ה","כל טעות היא הזדמנות ללמוד","אני בוחר/ת להסתכל על ההזדמנויות","אני חזק/ה ומסוגל/ת להתמודד","הדרך לפסגה מתחילה בצעד אחד","אני בחירה — אני יכול/ה לשנות"];
+
+let st = {sortPts:0, rfPts:0, scPts:0, rfIdx:0, scIdx:0, correct:0, pledge:"", sortDone:false};
+let dragged = null;
+
+function goTo(id) {
+  document.querySelectorAll('.screen').forEach(s=>s.classList.remove('active'));
+  document.getElementById(id).classList.add('active');
+  window.scrollTo(0,0);
+  if(id==='s-sort') initSort();
+  if(id==='s-reframe') initReframe();
+  if(id==='s-scenarios') initScenarios();
+  if(id==='s-pledge') initPledge();
+  renderPB();
+}
+
+function renderPB() {
+  const maps = {pb1:[1,0,0,0], pb2:[1,1,0,0], pb3:[1,1,1,0]};
+  Object.entries(maps).forEach(([id, done]) => {
+    const el = document.getElementById(id);
+    if(!el) return;
+    el.innerHTML='';
+    done.forEach((d,i) => {
+      const dot = document.createElement('div');
+      dot.className='progress-dot'+(d?' done':' current');
+      el.appendChild(dot);
+    });
+  });
+}
+
+function flipIt(el) {
+  if(el.dataset.flipped==='1') {
+    el.querySelector('p').innerHTML='<span class="front">'+el.dataset.front+'</span>';
+    el.dataset.flipped='0'; el.classList.remove('flipped'); return;
+  }
+  el.querySelector('p').textContent=el.dataset.back;
+  el.dataset.flipped='1'; el.classList.add('flipped');
+}
+
+function initSort() {
+  if(st.sortDone) return;
+  const pool = document.getElementById('pool');
+  pool.innerHTML='';
+  document.getElementById('zone-pos').innerHTML='';
+  document.getElementById('zone-neg').innerHTML='';
+  document.getElementById('sort-result').style.display='none';
+  document.getElementById('btn-sort-check').style.display='none';
+  document.getElementById('btn-sort-next').style.display='none';
+  THOUGHTS.forEach((t,i) => {
+    const c = document.createElement('div');
+    c.className='draggable'; c.draggable=true;
+    c.dataset.idx=i; c.dataset.type=t.type;
+    c.textContent=t.text;
+    c.addEventListener('dragstart',e=>{dragged=c; setTimeout(()=>c.style.opacity='0.4',0);});
+    c.addEventListener('dragend',e=>{c.style.opacity='1'; checkPoolDone();});
+    pool.appendChild(c);
+  });
+}
+
+function allowDrop(e){e.preventDefault();}
+function dropCard(e,zone){
+  e.preventDefault(); e.currentTarget.classList.remove('drag-over');
+  if(!dragged) return;
+  dragged.classList.remove('in-pos','in-neg');
+  dragged.classList.add('in-'+zone);
+  e.currentTarget.appendChild(dragged);
+  dragged=null; checkPoolDone();
+}
+function checkPoolDone(){
+  const placed=document.querySelectorAll('#zone-pos .draggable, #zone-neg .draggable').length;
+  document.getElementById('btn-sort-check').style.display=placed===THOUGHTS.length?'inline-flex':'none';
+}
+function checkSort(){
+  let correct=0;
+  document.querySelectorAll('#zone-pos .draggable').forEach(c=>{if(c.dataset.type==='pos')correct++;});
+  document.querySelectorAll('#zone-neg .draggable').forEach(c=>{if(c.dataset.type==='neg')correct++;});
+  st.sortPts=correct*5; st.correct+=correct; st.sortDone=true;
+  const pct=Math.round(correct/THOUGHTS.length*100);
+  const ok=pct>=75;
+  document.getElementById('sort-fb').innerHTML=`<div class="feedback-box ${ok?'feedback-ok':'feedback-err'}"><p>${ok?'🎉 כל הכבוד! סיווגת '+correct+' מחשבות נכון מתוך '+THOUGHTS.length+'. ממש מרשים!':'🤔 סיווגת '+correct+' נכון מתוך '+THOUGHTS.length+'. שימו לב: מחשבה חיובית מחזקת ומאפשרת, מחשבה שלילית מגבילה ומקטינה.'}</p></div>`;
+  document.getElementById('sort-pts').textContent=st.sortPts;
+  document.getElementById('sort-result').style.display='block';
+  document.getElementById('btn-sort-check').style.display='none';
+  document.getElementById('btn-sort-next').style.display='inline-flex';
+}
+
+function initReframe(){st.rfIdx=0; renderReframe();}
+function renderReframe(){
+  const r=REFRAMES[st.rfIdx];
+  document.getElementById('reframe-content').innerHTML=`
+    <div class="neg-box"><div class="lbl">מחשבה שלילית לשינוי:</div><p>"${r.neg}"</p></div>
+    <div class="hint-box">💡 רמז: ${r.hint}</div>
+    <div class="field-label">כתבו מחשבה חיובית במקום:</div>
+    <textarea id="rf-ta" rows="2" placeholder="אני יכול/ה..."></textarea>
+    <div id="rf-fb" style="margin-top:0.75rem;"></div>
+    <div class="step-counter">${st.rfIdx+1} מתוך ${REFRAMES.length}</div>`;
+  document.getElementById('btn-rf-check').style.display='inline-flex';
+  document.getElementById('btn-rf-next').style.display='none';
+}
+function checkReframe(){
+  const val=document.getElementById('rf-ta').value.trim();
+  if(!val){document.getElementById('rf-fb').innerHTML='<div class="feedback-box feedback-err"><p>יש לכתוב משהו קודם 😊</p></div>';return;}
+  st.rfPts+=15; st.correct++;
+  const r=REFRAMES[st.rfIdx];
+  document.getElementById('rf-fb').innerHTML=`<div class="feedback-box feedback-ok"><p>✅ נהדר! כתבת: "${val}"<br>דוגמה נוספת: "${r.example}"</p></div>`;
+  document.getElementById('btn-rf-check').style.display='none';
+  const nextBtn=document.getElementById('btn-rf-next');
+  nextBtn.style.display='inline-flex';
+  if(st.rfIdx===REFRAMES.length-1){nextBtn.textContent='לשלב 3 ←'; nextBtn.onclick=()=>goTo('s-scenarios');}
+  else{nextBtn.textContent='הבא ←'; nextBtn.onclick=nextReframe;}
+}
+function nextReframe(){st.rfIdx++; renderReframe();}
+
+function initScenarios(){st.scIdx=0; renderScenario();}
+function renderScenario(){
+  const s=SCENARIOS[st.scIdx];
+  document.getElementById('scenario-content').innerHTML=`
+    <div class="scenario-box"><div class="lbl">הסיטואציה:</div><p>${s.sit}</p></div>
+    <div class="field-label">מה היית חושב/ת? בחר/י את המחשבה המועצמת ביותר:</div>
+    <div class="options-list">${s.opts.map((o,i)=>`<button class="opt-btn" id="opt-${i}" onclick="pickScenario(${i})">${o}</button>`).join('')}</div>
+    <div id="sc-fb"></div>
+    <div class="step-counter">שאלה ${st.scIdx+1} מתוך ${SCENARIOS.length}</div>`;
+  const nav=document.getElementById('sc-nav');
+  const old=nav.querySelector('.sc-next-btn');
+  if(old) old.remove();
+}
+function pickScenario(picked){
+  const s=SCENARIOS[st.scIdx];
+  document.querySelectorAll('.opt-btn').forEach(b=>b.disabled=true);
+  document.getElementById('opt-'+picked).classList.add(picked===s.correct?'correct-ans':'wrong-ans');
+  document.getElementById('opt-'+s.correct).classList.add('correct-ans');
+  const ok=picked===s.correct;
+  if(ok){st.scPts+=10; st.correct++;}
+  document.getElementById('sc-fb').innerHTML=`<div class="feedback-box ${ok?'feedback-ok':'feedback-err'}"><p>${ok?s.msg:'🤔 לא בדיוק. '+s.msg.replace('✅','💡')}</p></div>`;
+  const nav=document.getElementById('sc-nav');
+  const btn=document.createElement('button');
+  btn.className='btn btn-primary sc-next-btn';
+  const isLast=st.scIdx===SCENARIOS.length-1;
+  btn.textContent=isLast?'לשלב 4 ←':'הבא ←';
+  btn.onclick=()=>{if(isLast)goTo('s-pledge');else{st.scIdx++;renderScenario();}};
+  nav.appendChild(btn);
+}
+
+function initPledge(){
+  const chips=document.getElementById('pledge-chips');
+  chips.innerHTML=PLEDGES.map(p=>`<button class="pledge-chip" onclick="selectPledge('${p}',this)">${p}</button>`).join('');
+}
+function selectPledge(text,btn){
+  document.querySelectorAll('.pledge-chip').forEach(c=>c.classList.remove('selected'));
+  btn.classList.add('selected');
+  document.getElementById('pledge-input').value=text;
+  showPledge(text);
+}
+function onPledgeInput(){
+  const v=document.getElementById('pledge-input').value.trim();
+  document.querySelectorAll('.pledge-chip').forEach(c=>c.classList.remove('selected'));
+  if(v) showPledge(v); else document.getElementById('pledge-preview-box').style.display='none';
+}
+function showPledge(text){
+  document.getElementById('pledge-display').textContent='"'+text+'"';
+  document.getElementById('pledge-preview-box').style.display='block';
+}
+function savePledge(){
+  const text=document.getElementById('pledge-input').value.trim();
+  if(!text){alert('יש לכתוב או לבחור מחשבה קודם 😊');return;}
+  st.pledge=text;
+  const total=st.sortPts+st.rfPts+st.scPts;
+  const pct=Math.min(100,Math.round(total));
+  document.getElementById('final-pct').textContent=pct+'%';
+  document.getElementById('stat-pts').textContent=total;
+  document.getElementById('stat-correct').textContent=st.correct;
+  document.getElementById('pledge-final-txt').textContent='"'+text+'"';
+  document.getElementById('final-stars').textContent=pct>=90?'⭐⭐⭐':pct>=70?'⭐⭐':'⭐';
+  goTo('s-results');
+}
+function restart(){
+  st={sortPts:0,rfPts:0,scPts:0,rfIdx:0,scIdx:0,correct:0,pledge:"",sortDone:false};
+  goTo('s-welcome');
+}
+</script>
+</body>
+</html>
